@@ -1,0 +1,16 @@
+# Salesforce CLI and VS Code extension state
+.sf/
+.sfdx/
+.localdevserver/
+**/lwc/jsconfig.json
+**/aura/jsconfig.json
+deploy-options.json
+
+# Tooling output
+node_modules/
+coverage/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

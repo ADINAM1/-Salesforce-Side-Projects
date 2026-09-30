@@ -1,0 +1,62 @@
+<template>
+    <lightning-card title="Enrollment" icon-name="standard:education">
+        <div class="slds-p-horizontal_medium" lwc:if={summary}>
+            <p class="slds-text-body_small slds-m-bottom_xx-small">{seatsLabel}</p>
+            <lightning-progress-bar value={percentFull} size="large"></lightning-progress-bar>
+
+            <div class="slds-grid slds-gutters slds-m-top_medium slds-grid_vertical-align-end">
+                <div class="slds-col">
+                    <lightning-record-picker
+                        label="Contact"
+                        placeholder="Search contacts..."
+                        object-api-name="Contact"
+                        onchange={handleContactChange}>
+                    </lightning-record-picker>
+                </div>
+                <div class="slds-col slds-grow-none">
+                    <lightning-button label="Enroll" variant="brand" disabled={noContact} onclick={handleEnroll}></lightning-button>
+                </div>
+            </div>
+
+            <h3 class="slds-text-heading_small slds-m-top_medium">Offers pending</h3>
+            <template lwc:if={hasOffers}>
+                <template for:each={summary.offered} for:item="row">
+                    <div key={row.id} class="slds-grid slds-grid_vertical-align-center slds-p-vertical_xx-small">
+                        <span class="slds-col">
+                            {row.contactName}, expires
+                            <lightning-formatted-date-time value={row.offerExpiresAt} month="short" day="numeric"
+                                hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                        </span>
+                        <lightning-button label="Accept" data-id={row.id} data-status="Enrolled" onclick={handleAction}
+                            class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button label="Decline" data-id={row.id} data-status="Declined" onclick={handleAction}
+                            class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </template>
+            </template>
+            <p lwc:else class="slds-text-color_weak">No pending offers.</p>
+
+            <h3 class="slds-text-heading_small slds-m-top_medium">Enrolled</h3>
+            <template lwc:if={hasEnrolled}>
+                <template for:each={summary.enrolled} for:item="row">
+                    <div key={row.id} class="slds-grid slds-grid_vertical-align-center slds-p-vertical_xx-small">
+                        <span class="slds-col">{row.contactName}</span>
+                        <lightning-button label="Withdraw" data-id={row.id} data-status="Withdrawn" onclick={handleAction}></lightning-button>
+                    </div>
+                </template>
+            </template>
+            <p lwc:else class="slds-text-color_weak">Nobody enrolled yet.</p>
+
+            <h3 class="slds-text-heading_small slds-m-top_medium">Waitlist</h3>
+            <template lwc:if={hasWaitlist}>
+                <template for:each={summary.waitlist} for:item="row">
+                    <div key={row.id} class="slds-grid slds-grid_vertical-align-center slds-p-vertical_xx-small">
+                        <span class="slds-col">#{row.position} {row.contactName}</span>
+                        <lightning-button label="Withdraw" data-id={row.id} data-status="Withdrawn" onclick={handleAction}></lightning-button>
+                    </div>
+                </template>
+            </template>
+            <p lwc:else class="slds-text-color_weak slds-m-bottom_small">Nobody is waiting.</p>
+        </div>
+    </lightning-card>
+</template>

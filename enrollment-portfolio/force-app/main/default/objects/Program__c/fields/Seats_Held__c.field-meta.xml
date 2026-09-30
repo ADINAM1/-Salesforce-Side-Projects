@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Seats_Held__c</fullName>
+    <description>Enrollments holding a seat (Enrolled or Offered). Display only; Apex re-counts under a lock.</description>
+    <externalId>false</externalId>
+    <label>Seats Held</label>
+    <summaryFilterItems>
+        <field>Enrollment__c.Status__c</field>
+        <operation>equals</operation>
+        <value>Enrolled, Offered</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Enrollment__c.Program__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offer_Window_Hours__c</fullName>
+    <defaultValue>48</defaultValue>
+    <description>How long a waitlisted family has to accept an offered seat.</description>
+    <externalId>false</externalId>
+    <label>Offer Window (Hours)</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

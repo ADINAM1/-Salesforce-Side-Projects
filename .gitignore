@@ -1,0 +1,3 @@
+# OS and editor files at the repo root; each project has its own .gitignore for Salesforce tooling
+.DS_Store
+Thumbs.db
